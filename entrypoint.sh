@@ -1,6 +1,11 @@
 #!/bin/bash
-# Start Flask app with Gunicorn on required $PORT
-gunicorn --bind 0.0.0.0:8080 app:app &
+set -e  # Exit immediately if a command exits with a non-zero status
 
-# Start Telegram bot
+# Use PORT from environment, fallback to 8080
+PORT=${PORT:-8080}
+
+# Start Flask app in background
+gunicorn --bind 0.0.0.0:$PORT app:app &
+
+# Start Telegram bot & scraper
 python main.py
