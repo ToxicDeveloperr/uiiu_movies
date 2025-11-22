@@ -1,9 +1,9 @@
-requests==2.31.0
-beautifulsoup4==4.12.2
-pymongo==4.6.1
-aiogram==3.4.1
-aiohttp==3.9.1
-pytz==2023.3
-apscheduler==3.10.4
-dnspython==2.4.2
-python-dotenv==1.0.0
+aiogram==3.*
+pymongo==4.*
+apscheduler==3.*
+requests==2.*
+beautifulsoup4==4.*
+pytz==2024.*
+aiohttp==3.*
+gunicorn==20.* # For serving the web application (Render/Koyeb requirement)
+flask==3.* # Minimal web server framework
