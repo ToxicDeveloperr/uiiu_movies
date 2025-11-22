@@ -259,6 +259,8 @@ async def send_movie(movie: Dict):
 
         # 2. Mark as posted only after successful send (or successful fallback)
         await mark_movie_posted(movie)
+        await delete_movie_from_db(movie)
+
 
         # 3. Anti-Flood Control: Wait for POST_DELAY seconds
         await asyncio.sleep(POST_DELAY)
