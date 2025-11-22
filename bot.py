@@ -175,6 +175,28 @@ async def mark_movie_posted(movie):
             f"Bot: Failed to mark movie as posted {movie.get('title')}: {e}")
         return False
 
+def delete_movie_from_db(movie):
+    """
+    Deletes the movie from scraped_data.latest_movies or random_movies
+    after posting to avoid duplicates forever.
+    """
+    doc = fetch_latest_doc()
+    if not doc:
+        return
+
+    # Pull from both arrays
+    data_col.update_one(
+        {"_id": doc["_id"]},
+        {"$pull": {"latest_movies": {"title": movie.get("title")}}}
+    )
+
+    data_col.update_one(
+        {"_id": doc["_id"]},
+        {"$pull": {"random_movies": {"title": movie.get("title")}}}
+    )
+
+    logger.info(f"Bot: Deleted from DB -> {movie.get('title')}")
+
 
 # -----------------------------
 # CORE SOLUTION: Safe Image Posting & Anti-Flood
