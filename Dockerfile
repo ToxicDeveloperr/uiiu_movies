@@ -17,4 +17,4 @@ EXPOSE 8000
 # Define the command to run the main worker process
 # Note: For Koyeb, you will typically use the "Docker Command" setting 
 # in the UI as 'python main.py' and the Web App as 'gunicorn app:app'
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "app:app"]
