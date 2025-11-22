@@ -244,8 +244,8 @@ async def postnow(message: Message):
 # SCHEDULER
 # --------------------------------------------------------------------
 def register_jobs(scheduler):
-    scheduler.add_job(post_n, "cron", args=[4], hour=21, minute=34, timezone=TZ)
-    scheduler.add_job(post_n, "cron", args=[4], hour=15, minute=0, timezone=TZ)
+    scheduler.add_job(post_n, "cron", args=[4], hour=21, minute=39, timezone=TZ)
+    scheduler.add_job(post_n, "cron", args=[4], hour=21, minute=41, timezone=TZ)
     scheduler.add_job(post_n, "cron", args=[4], hour=19, minute=0, timezone=TZ)
     scheduler.add_job(post_n, "cron", args=[4], hour=22, minute=0, timezone=TZ)
 
