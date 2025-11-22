@@ -325,13 +325,13 @@ async def postnow_cmd(message: Message):
 def register_bot_jobs(scheduler: AsyncIOScheduler):
     """Registers the bot's scheduled posting jobs."""
     # Posting 4 movies at scheduled times (IST)
-    scheduler.add_job(post_n_movies, "cron", args=[4], hour=12, minute=0, timezone=TZ)
-    scheduler.add_job(post_n_movies, "cron", args=[4], hour=15, minute=0, timezone=TZ)
-    scheduler.add_job(post_n_movies, "cron", args=[4], hour=19, minute=0, timezone=TZ)
-    scheduler.add_job(post_n_movies, "cron", args=[4], hour=22, minute=0, timezone=TZ) # Fixed hour 16:00 to 22:00
+    scheduler.add_job(post_n_movies, "cron", args=[4], hour=17, minute=43, timezone=TZ)
+    scheduler.add_job(post_n_movies, "cron", args=[4], hour=17, minute=45, timezone=TZ)
+    scheduler.add_job(post_n_movies, "cron", args=[4], hour=17, minute=47, timezone=TZ)
+    scheduler.add_job(post_n_movies, "cron", args=[4], hour=17, minute=49, timezone=TZ) # Fixed hour 16:00 to 22:00
     
     # Post all remaining movies late at night (IST)
-    scheduler.add_job(post_all_remaining, "cron", hour=23, minute=55, timezone=TZ) # Fixed hour 16:02 to 23:55
+    scheduler.add_job(post_all_remaining, "cron", hour=17, minute=51, timezone=TZ) # Fixed hour 16:02 to 23:55
 
     logger.info("Bot: Posting jobs scheduled")
 
