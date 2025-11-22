@@ -24,9 +24,9 @@ import pytz
 # --------------------------------------------------------------------
 # CONFIG
 # --------------------------------------------------------------------
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
-MONGO_URI = os.environ.get("MONGO_URI", "")
-CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1000000000000"))
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "8148829995:AAH8Org3ZQTXPqmhV0ilC5ozKSMuHC_4WPs")
+MONGO_URI = os.environ.get("MONGO_URI", "mongodb+srv://tejaschavan1110:15HNqpSmaq40eQzX@cluster0.aoldz.mongodb.net/?retryWrites=true&w=majority")
+CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002063549539"))
 
 DB_NAME = "uiiu_scraper"
 COL_DATA = "scraped_data"
