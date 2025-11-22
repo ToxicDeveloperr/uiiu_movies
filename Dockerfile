@@ -1,41 +1,20 @@
-# Use Python 3.11 slim image for smaller size
+# Use a slim Python image for a smaller container size
 FROM python:3.11-slim
 
-# Set working directory
-WORKDIR /app
+# Set the working directory inside the container
+WORKDIR /usr/src/app
 
-# Set environment variables
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy requirements first (for better caching)
+# Copy the requirements file and install dependencies
 COPY requirements.txt .
-
-# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
-COPY scraper.py .
-COPY bot.py .
-COPY main.py .
+# Copy the rest of the application files
+COPY . .
 
-# Create a non-root user
-RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
-USER appuser
+# Expose the port that Flask will listen on (usually handled by the platform)
+EXPOSE 8000 
 
-# Expose port for health checks
-EXPOSE 8080
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=300s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')" || exit 1
-
-# Run the application
-CMD ["python", "main.py"]
+# Define the command to run the main worker process
+# Note: For Koyeb, you will typically use the "Docker Command" setting 
+# in the UI as 'python main.py' and the Web App as 'gunicorn app:app'
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]
