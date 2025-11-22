@@ -5,8 +5,10 @@ from datetime import datetime
 from typing import Dict, List
 
 import aiohttp
+from aiohttp import ClientTimeout
 from aiogram.types import BufferedInputFile
 from aiogram.exceptions import TelegramRetryAfter
+from aiogram.client.session.aiohttp import AiohttpSession
 from pymongo import MongoClient
 from pymongo.errors import DuplicateKeyError
 from aiogram import Bot, Dispatcher
@@ -74,9 +76,22 @@ except Exception as e:
     raise
 
 # -----------------------------
-# Aiogram Setup
+# Aiogram Setup with Custom Timeout
 # -----------------------------
-bot = Bot(BOT_TOKEN)
+from aiogram.client.session.aiohttp import AiohttpSession
+from aiohttp import ClientTimeout
+
+# Create session with longer timeout
+session = AiohttpSession(
+    timeout=ClientTimeout(
+        total=60,      # Total timeout
+        connect=30,    # Connection timeout
+        sock_read=30,  # Socket read timeout
+        sock_connect=30  # Socket connect timeout
+    )
+)
+
+bot = Bot(BOT_TOKEN, session=session)
 dp = Dispatcher()
 
 
@@ -340,7 +355,24 @@ async def main():
     scheduler.start()
     
     logger.info("✅ Bot is ready and running!")
-    await dp.start_polling(bot)
+    
+    # Retry logic for connection issues
+    max_retries = 5
+    retry_delay = 10
+    
+    for attempt in range(max_retries):
+        try:
+            await dp.start_polling(bot, polling_timeout=30)
+            break  # Success, exit loop
+        except Exception as e:
+            logger.error(f"❌ Bot polling failed (attempt {attempt + 1}/{max_retries}): {e}")
+            if attempt < max_retries - 1:
+                logger.info(f"⏳ Retrying in {retry_delay} seconds...")
+                await asyncio.sleep(retry_delay)
+                retry_delay *= 2  # Exponential backoff
+            else:
+                logger.error("❌ Max retries reached. Bot failed to start.")
+                raise
 
 
 if __name__ == "__main__":
