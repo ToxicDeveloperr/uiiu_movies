@@ -6,3 +6,4 @@ aiohttp==3.9.1
 pytz==2023.3
 apscheduler==3.10.4
 dnspython==2.4.2
+python-dotenv==1.0.0
