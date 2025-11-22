@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: movie-scraper-bot
+    env: docker
+    region: singapore  # Choose: oregon, frankfurt, singapore
+    plan: free  # or starter for paid plan
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    
+    # Environment Variables
+    envVars:
+      - key: BOT_TOKEN
+        sync: false  # Set manually in Render dashboard
+      - key: MONGO_URI
+        sync: false  # Set manually in Render dashboard
+      - key: CHANNEL_ID
+        sync: false  # Set manually in Render dashboard
+      - key: PYTHONUNBUFFERED
+        value: "1"
+    
+    # Health check endpoint (optional)
+    healthCheckPath: /
+    
+    # Auto-deploy on push
+    autoDeploy: true
+    
+    # Keep service running
+    scaling:
+      minInstances: 1
+      maxInstances: 1
