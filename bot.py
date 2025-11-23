@@ -135,7 +135,7 @@ def get_unposted_movies(limit=None) -> List[Dict]:
 def build_caption(movie: Dict) -> str:
     """Formats the movie details into an HTML caption."""
     title = escape_html(movie.get("title", "No Title"))
-    lines = [f"<b>{title}</b>", "", "⬇ Download Links ⬇", ""]
+    lines = [f"<b>{title}</b>", "", "⬇ Download✅ Stream Online✅⬇", ""]
 
     for dl in movie.get("download_links", []):
         url = escape_html(dl.get("url", ""))
