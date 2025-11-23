@@ -11,7 +11,7 @@ BASE_URL = "https://uiiumovie.fun/page/{}/"
 # SCRAPE_TIME is not needed here anymore, the scheduler in main.py will handle it.
 
 # CONFIG: Use a separate, consistent way for env variables if possible
-MONGO_URI = "mongodb+srv://tejaschavan1110:15HNqpSmaq40eQzX@cluster0.aoldz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+MONGO_URI = "mongodb+srv://tejaschavan1110_db_user:PaR3JUapUXnFM5Ht@cluster0.o8vlhjq.mongodb.net/?appName=Cluster0"
 DB_NAME = "uiiu_scraper"
 COL_DATA = "scraped_data"
 COL_META = "meta_data"
