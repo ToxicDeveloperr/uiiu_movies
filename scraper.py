@@ -56,12 +56,16 @@ def scrape_movie_details(url):
         dl_section = soup.find("div", id="download")
         if dl_section:
             for a in dl_section.find_all("a", href=True):
+                original = a["href"]
+                short = shorten_url(original)
+    
                 movie_info["download_links"].append({
                     "quality": a.get_text(strip=True),
-                    "url": a["href"]
+                    "url": short
                 })
     except:
         pass
+
 
     # ⭐ DURATION
     try:
