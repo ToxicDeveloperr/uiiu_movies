@@ -35,7 +35,7 @@ COL_DATA = "scraped_data"
 COL_META = "meta_data"
 
 # CHANNEL_ID must be an integer, ensure the env variable is set correctly
-CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002063549539"))
+CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002484254899"))
 
 TZ = "Asia/Kolkata"
 RETRY_DELAY = 5 
