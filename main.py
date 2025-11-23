@@ -10,8 +10,8 @@ from scraper import scrape_one_page_for_today # Import the scraping function
 # -----------------------------
 # CONFIG
 # -----------------------------
-SCRAPE_TIME_HOUR = 10 # IST hour for scraping (e.g., 4:00 PM IST)
-SCRAPE_TIME_MINUTE = 52 # IST minute for scraping (e.g., 4:02 PM IST)
+SCRAPE_TIME_HOUR = 11 # IST hour for scraping (e.g., 4:00 PM IST)
+SCRAPE_TIME_MINUTE = 20 # IST minute for scraping (e.g., 4:02 PM IST)
 
 # -----------------------------
 # Logging Setup
