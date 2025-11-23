@@ -157,19 +157,28 @@ def scrape_page(page_number):
 def shorten_url(long_url):
     try:
         api_key = "180027087e13f4a147d7615e8ac5a8d93240050c"
-        short_api = f"https://arolink.com/api?api={api_key}&url={long_url}"
 
-        r = requests.get(short_api, timeout=10)
+        # URL ENCODE REQUIRED
+        encoded = requests.utils.quote(long_url, safe='')
+
+        api_url = (
+            f"https://arolinks.com/api?"
+            f"api={api_key}&url={encoded}&format=json"
+        )
+
+        r = requests.get(api_url, timeout=10)
         data = r.json()
 
-        # API structure vary ho sakti hai — adjust to your shortener
-        if "shortenedUrl" in data:
-            return data["shortenedUrl"]
-        elif "short" in data:
-            return data["short"]
-        else:
-            return long_url      # fallback
-    except:
+        # Expected format:
+        # {"status":"success","shortenedUrl":"https:\/\/arolinks.com\/xxxxx"}
+
+        if data.get("status") == "success":
+            return data.get("shortenedUrl", long_url)
+
+        return long_url
+
+    except Exception as e:
+        print("Shortener Error:", e)
         return long_url
 
 
