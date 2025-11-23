@@ -28,7 +28,7 @@ BOT_TOKEN = os.environ.get("BOT_TOKEN",
                           "8148829995:AAH8Org3ZQTXPqmhV0ilC5ozKSMuHC_4WPs")
 MONGO_URI = os.environ.get(
     "MONGO_URI",
-    "mongodb+srv://tejaschavan1110:15HNqpSmaq40eQzX@cluster0.aoldz.mongodb.net/?retryWrites=true&w=majority"
+    "mongodb+srv://tejaschavan1110_db_user:PaR3JUapUXnFM5Ht@cluster0.o8vlhjq.mongodb.net/?appName=Cluster0"
 )
 DB_NAME = "uiiu_scraper"
 COL_DATA = "scraped_data"
